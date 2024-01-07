@@ -25,6 +25,7 @@ namespace ApiPostApp.Controllers
 
         // GET: api/Packages
         [HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Package>>> GetPackages()
         {
             var packages = await _context.Package
@@ -42,7 +43,7 @@ namespace ApiPostApp.Controllers
             var jsonOptions = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true 
+                WriteIndented = true
             };
 
             var serializedPackages = JsonSerializer.Serialize(packages, jsonOptions);
@@ -52,6 +53,7 @@ namespace ApiPostApp.Controllers
 
             return Ok(deserializedPackage);
         }
+
 
         // GET: api/Packages/5
         [HttpGet("{id}")]
@@ -72,7 +74,7 @@ namespace ApiPostApp.Controllers
             var jsonOptions = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true 
+                WriteIndented = true
             };
 
             var serializedPackage = JsonSerializer.Serialize(package, jsonOptions);

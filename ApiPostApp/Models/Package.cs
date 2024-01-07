@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace PostApplication.Models
 {
@@ -37,6 +38,10 @@ namespace PostApplication.Models
 
         [Display(Name = "Post Office")]
         public PostOffice? PostOffice { get; set; }
+
+        public string PackageTitle => $"Package {ID}";
+
+        public string StatusAndAddress => $"Status {Status}\nAddress {Receiver.StreetAddress}";
 
     }
 }

@@ -26,6 +26,11 @@ namespace PostAppMaui.Data
             return restService.SavePackageAsync(item, isNewItem);
         }
 
+        public Task UpdatePackageStatusAsync(int packageId, string newStatus)
+        {
+            return restService.UpdatePackageStatusAsync(packageId, newStatus);
+        }
+
         public Task DeletePackageAsync(Package item)
         {
             return restService.DeletePackageAsync(item.ID);

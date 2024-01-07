@@ -14,5 +14,6 @@ namespace PostAppMaui.Data
         Task<List<Package>> RefreshDataAsync();
         Task SavePackageAsync(Package item, bool isNewItem);
         Task DeletePackageAsync(int id);
+        Task UpdatePackageStatusAsync(int id, string newStatus);
     }
 }

@@ -4,32 +4,28 @@
              x:Class="PostAppMaui.PackagePage"
              Title="PackagePage">
     <StackLayout Margin="20">
-        <Label Text="ID" />
-        <Entry Text="{Binding Package.ID.ToString()}" IsReadOnly="True" />
+        <Label Text="Package" />
+        <Label Text="{Binding ID}" />
 
-        <Label Text="Weight" />
-        <Entry Text="{Binding Package.Weight?.ToString()}" IsReadOnly="True" />
+        <Label Text="Receiver " />
+        <Label Text="{Binding Receiver.FullName}" />
+
+        <Label Text="Receiver " />
+        <Label Text="{Binding Receiver.StreetAddress}" />
 
         <Label Text="Status" />
-        <Entry Text="{Binding Package.Status}" IsReadOnly="True" />
+        <Label Text="{Binding Status}" />
 
-        <Label Text="Sender ID" />
-        <Entry Text="{Binding Package.SenderId.ToString()}" IsReadOnly="True" />
-
-        <Label Text="Receiver ID" />
-        <Entry Text="{Binding Package.ReceiverId.ToString()}" IsReadOnly="True" />
-
-        <Label Text="Assigned Courier ID" />
-        <Entry Text="{Binding Package.AssignedCourierId.ToString()}" IsReadOnly="True" />
-
-        <Label Text="Creation Date" />
-        <Entry Text="{Binding Package.CreationDate.ToString()}" IsReadOnly="True" />
-
-        <Label Text="Expected Arrival" />
-        <Entry Text="{Binding Package.ExpectedArrival.ToString()}" IsReadOnly="True" />
-
-        <Label Text="Post Office ID" />
-        <Entry Text="{Binding Package.PostOfficeID?.ToString()}" IsReadOnly="True" />
+        <Label Text="Status" />
+        <Picker Title="Select Status" SelectedItem="{Binding Package.Status, Mode=TwoWay}">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Processed</x:String>
+                    <x:String>Courier</x:String>
+                    <x:String>Delivered</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -40,5 +36,5 @@
             <Button Text="Save" Clicked="OnSaveButtonClicked" />
             <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" />
         </Grid>
-        </StackLayout>
+    </StackLayout>
 </ContentPage>

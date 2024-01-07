@@ -15,7 +15,7 @@
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding ID}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Status}"/>
+                            <Label Text="{Binding Receiver.StreetAddress}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

@@ -12,45 +12,21 @@ namespace PostAppMaui.Data
     {
         HttpClient client;
 
-        // Modify this URL with the appropriate IP and port
-        string RestUrl = "https://192.168.100.97:45456/api/Packages/{0}";
+        string RestUrl = "https://192.168.100.97:45455/api/Packages/{0}";
 
         public List<Package> Items { get; private set; }
 
         public RestService()
         {
             var httpClientHandler = new HttpClientHandler();
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-                (message, cert, chain, errors) => { return true; };
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
             client = new HttpClient(httpClientHandler);
         }
 
-        public async Task<Package> GetPackageDetailsAsync(int id)
-        {
-            Package package = null;
-            Uri uri = new Uri(string.Format(RestUrl, id));
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(uri);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    package = JsonConvert.DeserializeObject<Package>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return package;
-        }
         public async Task<List<Package>> RefreshDataAsync()
         {
-            List<Package> packages = new List<Package>();
-            Uri uri = new Uri(RestUrl);
+            Items = new List<Package>();
+            Uri uri = new Uri(string.Format(RestUrl, string.Empty));
 
             try
             {
@@ -59,19 +35,7 @@ namespace PostAppMaui.Data
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    packages = JsonConvert.DeserializeObject<List<Package>>(content);
-
-                    foreach (var package in packages)
-                    {
-                        Package detailedPackage = await GetPackageDetailsAsync(package.ID);
-                        if (detailedPackage != null)
-                        {
-                            package.Sender = detailedPackage.Sender;
-                            package.Receiver = detailedPackage.Receiver;
-                            package.AssignedCourier = detailedPackage.AssignedCourier;
-                            package.PostOffice = detailedPackage.PostOffice;
-                        }
-                    }
+                    Items = JsonConvert.DeserializeObject<List<Package>>(content);
                 }
             }
             catch (Exception ex)
@@ -79,7 +43,7 @@ namespace PostAppMaui.Data
                 Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return packages;
+            return Items;
         }
 
         public async Task SavePackageAsync(Package item, bool isNewItem = true)
@@ -124,6 +88,41 @@ namespace PostAppMaui.Data
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine(@"\tPackage successfully deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+        public async Task UpdatePackageStatusAsync(int id, string newStatus)
+        {
+            Uri uri = new Uri(string.Format(RestUrl, id));
+
+            try
+            {
+                // Fetch the existing package
+                HttpResponseMessage getResponse = await client.GetAsync(uri);
+
+                if (getResponse.IsSuccessStatusCode)
+                {
+                    string getContent = await getResponse.Content.ReadAsStringAsync();
+                    Package existingPackage = JsonConvert.DeserializeObject<Package>(getContent);
+
+                    // Update the status
+                    existingPackage.Status = newStatus;
+
+                    // Serialize the updated package
+                    string updatedJson = JsonConvert.SerializeObject(existingPackage);
+                    StringContent updatedContent = new StringContent(updatedJson, Encoding.UTF8, "application/json");
+
+                    // Send the updated package to the server
+                    HttpResponseMessage updateResponse = await client.PutAsync(uri, updatedContent);
+
+                    if (updateResponse.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine(@"\tPackage status successfully updated.");
+                    }
                 }
             }
             catch (Exception ex)

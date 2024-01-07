@@ -10,9 +10,10 @@ public partial class PackagePage : ContentPage
     async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var package = (Package)BindingContext;
-        await App.Database.SavePackageAsync(package);
+        await App.Database.UpdatePackageStatusAsync(package.ID,package.Status);
         await Navigation.PopAsync();
     }
+
 
     async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
