@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPostApp", "ApiPostApp.csproj", "{9AAD3E1A-C1AE-4243-B261-9E856A57F662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostAppMaui", "..\PostAppMaui\PostAppMaui.csproj", "{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AAD3E1A-C1AE-4243-B261-9E856A57F662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AAD3E1A-C1AE-4243-B261-9E856A57F662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AAD3E1A-C1AE-4243-B261-9E856A57F662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AAD3E1A-C1AE-4243-B261-9E856A57F662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B77FD7-A975-4BC7-988E-B3A6E6D308CD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA05D8F5-C762-4D96-BF5B-39BBF17C93D0}
+	EndGlobalSection
+EndGlobal

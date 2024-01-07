@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PostAppMaui.PackagePage"
+             Title="PackagePage">
+    <StackLayout Margin="20">
+        <Label Text="ID" />
+        <Entry Text="{Binding Package.ID.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Weight" />
+        <Entry Text="{Binding Package.Weight?.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Status" />
+        <Entry Text="{Binding Package.Status}" IsReadOnly="True" />
+
+        <Label Text="Sender ID" />
+        <Entry Text="{Binding Package.SenderId.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Receiver ID" />
+        <Entry Text="{Binding Package.ReceiverId.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Assigned Courier ID" />
+        <Entry Text="{Binding Package.AssignedCourierId.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Creation Date" />
+        <Entry Text="{Binding Package.CreationDate.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Expected Arrival" />
+        <Entry Text="{Binding Package.ExpectedArrival.ToString()}" IsReadOnly="True" />
+
+        <Label Text="Post Office ID" />
+        <Entry Text="{Binding Package.PostOfficeID?.ToString()}" IsReadOnly="True" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Save" Clicked="OnSaveButtonClicked" />
+            <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" />
+        </Grid>
+        </StackLayout>
+</ContentPage>
