@@ -4,16 +4,19 @@
              x:Class="PostAppMaui.PackagePage"
              Title="PackagePage">
     <StackLayout Margin="20">
-        <Label Text="Package" />
+        <Label Text="Package" FontAttributes="Bold"/>
         <Label Text="{Binding ID}" />
 
-        <Label Text="Receiver " />
+        <Label Text="Receiver" FontAttributes="Bold"/>
         <Label Text="{Binding Receiver.FullName}" />
 
-        <Label Text="Receiver " />
+        <Label Text="Receiver Phone Number" FontAttributes="Bold"/>
+        <Label Text="{Binding Receiver.PhoneNumber}" />
+
+        <Label Text="Receiver Address" FontAttributes="Bold"/>
         <Label Text="{Binding Receiver.StreetAddress}" />
 
-        <Label Text="Status" />
+        <Label Text="Status" FontAttributes="Bold"/>
         <Picker Title="Select Status" SelectedItem="{Binding Status}">
             <Picker.Items>
                 <x:String>Courier</x:String>

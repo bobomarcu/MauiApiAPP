@@ -3,15 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PostAppMaui.ListEntryPage"
              Title="ListEntryPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Package"
-                     Clicked="OnPackageAddedClicked" />
-    </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <ListView x:Name="listView" Margin="20" ItemSelected="OnListViewItemSelected">
+    <StackLayout Spacing="20">
+        <ListView x:Name="listView" Margin="20" ItemSelected="OnListViewItemSelected" RowHeight="100">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate >
                     <ViewCell>
                         <StackLayout>
                             <Label Text="{Binding PackageTitle}" FontAttributes="Bold"/>
