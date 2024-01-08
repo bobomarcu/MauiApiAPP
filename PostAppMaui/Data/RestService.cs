@@ -5,15 +5,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using PostApplication.Models;
+using Microsoft.Extensions.Logging;
 
 namespace PostAppMaui.Data
 {
     public class RestService : IRestService
     {
         HttpClient client;
+        private readonly ILogger<RestService> logger;
 
         string RestUrl = "https://192.168.100.97:45455/api/Packages/{0}";
-
+        string RestUrlUpdate = "https://192.168.100.97:45455/api/Packages/{0}/updatestatus";
         public List<Package> Items { get; private set; }
 
         public RestService()
@@ -97,32 +99,17 @@ namespace PostAppMaui.Data
         }
         public async Task UpdatePackageStatusAsync(int id, string newStatus)
         {
-            Uri uri = new Uri(string.Format(RestUrl, id));
+            Uri uri = new Uri(string.Format(RestUrlUpdate, id));
 
             try
             {
-                // Fetch the existing package
-                HttpResponseMessage getResponse = await client.GetAsync(uri);
+                StringContent updatedContent = new StringContent($"\"{newStatus}\"", Encoding.UTF8, "application/json");
 
-                if (getResponse.IsSuccessStatusCode)
+                HttpResponseMessage updateResponse = await client.PutAsync(uri, updatedContent);
+
+                if (updateResponse.IsSuccessStatusCode)
                 {
-                    string getContent = await getResponse.Content.ReadAsStringAsync();
-                    Package existingPackage = JsonConvert.DeserializeObject<Package>(getContent);
-
-                    // Update the status
-                    existingPackage.Status = newStatus;
-
-                    // Serialize the updated package
-                    string updatedJson = JsonConvert.SerializeObject(existingPackage);
-                    StringContent updatedContent = new StringContent(updatedJson, Encoding.UTF8, "application/json");
-
-                    // Send the updated package to the server
-                    HttpResponseMessage updateResponse = await client.PutAsync(uri, updatedContent);
-
-                    if (updateResponse.IsSuccessStatusCode)
-                    {
-                        Console.WriteLine(@"\tPackage status successfully updated.");
-                    }
+                    Console.WriteLine(@"\tPackage status successfully updated.");
                 }
             }
             catch (Exception ex)

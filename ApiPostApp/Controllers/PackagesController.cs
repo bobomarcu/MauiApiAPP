@@ -115,6 +115,31 @@ namespace ApiPostApp.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/updatestatus")]
+        public async Task<IActionResult> UpdatePackageStatus(int id, [FromBody] string newStatus)
+        {
+            try
+            {
+                var existingPackage = await _context.Package.FindAsync(id);
+
+                if (existingPackage == null)
+                {
+                    return NotFound();
+                }
+
+                existingPackage.Status = newStatus;
+
+                _context.Entry(existingPackage).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         // POST: api/Packages
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

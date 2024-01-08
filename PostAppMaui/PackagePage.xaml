@@ -14,18 +14,13 @@
         <Label Text="{Binding Receiver.StreetAddress}" />
 
         <Label Text="Status" />
-        <Label Text="{Binding Status}" />
-
-        <Label Text="Status" />
-        <Picker Title="Select Status" SelectedItem="{Binding Package.Status, Mode=TwoWay}">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Processed</x:String>
-                    <x:String>Courier</x:String>
-                    <x:String>Delivered</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
+        <Picker Title="Select Status" SelectedItem="{Binding Status}">
+            <Picker.Items>
+                <x:String>Courier</x:String>
+                <x:String>Delivered</x:String>
+            </Picker.Items>
         </Picker>
+
 
         <Grid>
             <Grid.ColumnDefinitions>
