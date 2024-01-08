@@ -1,8 +1,12 @@
 namespace PostAppMaui;
+
+using Plugin.LocalNotification;
 using PostApplication.Models;
+using System.Net;
 
 public partial class ListEntryPage : ContentPage
 {
+
 	public ListEntryPage()
 	{
 		InitializeComponent();
@@ -11,7 +15,10 @@ public partial class ListEntryPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
         listView.ItemsSource = await App.Database.GetPackagesAsync();
+
+        
     }
 
     async void OnPackageAddedClicked(object sender, EventArgs e)
