@@ -15,10 +15,5 @@ public partial class PackagePage : ContentPage
     }
 
 
-    async void OnDeleteButtonClicked(object sender, EventArgs e)
-    {
-        var package = (Package)BindingContext;
-        await App.Database.DeletePackageAsync(package);
-        await Navigation.PopAsync();
-    }
+   
 }
